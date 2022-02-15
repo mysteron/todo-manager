@@ -1,0 +1,28 @@
+<div class="card-body" *ngIf="!editing">
+  <div class="row">
+    <div class="col">
+      <h5 class="card-title">{{category.title}}</h5>
+    </div>
+    <div class="col text-end">
+      <i class="bi bi-pencil-square clickable mx-1" (click)="editing = !editing"></i>
+      <i class="bi bi-trash clickable mx-1" (click)="fireDelete(category)"></i>
+    </div>
+  </div>
+  <p class="card-text">{{category.description}}</p>
+</div>
+<div class="card-body" *ngIf="editing">
+  <div class="mb-3">
+    <label for="title" class="form-label ">Title</label>
+    <input type="text" [(ngModel)]="category.title" class="form-control form-control-sm" id="title"
+      aria-describedby="title-help">
+    <div id="title-help" class="form-text">The title of the category</div>
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <input type="text" [(ngModel)]="category.description" class="form-control form-control-sm" id="description"
+      aria-describedby="description-help">
+    <div id="description-help" class="form-text">A short description of the category</div>
+  </div>
+  <button type="button" (click)="fireUpdate(category)" class="btn btn-primary btn-sm">Save</button>
+  <button type="button" (click)="editing = !editing" class="btn btn-outline-secondary mx-2 btn-sm">Cancel</button>
+</div>

@@ -1,0 +1,43 @@
+<div class="card-body" *ngIf="!editing">
+  <div class="row">
+    <div class="col">
+      <div class="form-check form-switch">
+
+        <input class="form-check-input" (change)="fireChangeStatus(task,$event)"
+          [checked]="task.status === TaskStatus.Done" type="checkbox" role="switch" id="doneCheck">
+        <label for="doneCheck" class="form-check-label">
+          <h5 class="card-title">{{task.title}}</h5>
+        </label>
+
+      </div>
+    </div>
+    <div class="col text-end">
+      <i class="bi bi-pencil-square clickable mx-1" (click)="editing = !editing"></i>
+      <i class="bi bi-trash clickable mx-1" (click)="fireDelete(task)"></i>
+    </div>
+  </div>
+  <p class="card-text">{{task.description}}</p>
+  <span class="badge bg-success">{{categoryTitle}}</span>
+</div>
+<div class="card-body" *ngIf="editing">
+  <div class="mb-3">
+    <label for="title" class="form-label ">Title</label>
+    <input type="text" [(ngModel)]="task.title" class="form-control form-control-sm" id="title"
+      aria-describedby="title-help">
+    <div id="title-help" class="form-text">The title of the task</div>
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <input type="text" [(ngModel)]="task.description" class="form-control form-control-sm" id="description"
+      aria-describedby="description-help">
+    <div id="description-help" class="form-text">A short description of the task</div>
+  </div>
+  <div class="mb-3">
+    <select class="form-select form-select-sm" aria-label="category" [(ngModel)]="task.categoryId">
+      <option [ngValue]="category.id" *ngFor="let category of categories">{{category.title}}
+      </option>
+    </select>
+  </div>
+  <button type="button" (click)="fireUpdate(task)" class="btn btn-primary btn-sm">Save</button>
+  <button type="button" (click)="editing = !editing" class="btn btn-outline-secondary mx-2 btn-sm">Cancel</button>
+</div>
