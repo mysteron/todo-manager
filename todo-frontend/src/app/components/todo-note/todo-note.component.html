@@ -23,21 +23,21 @@
   <div class="mb-3">
     <label for="title" class="form-label ">Title</label>
     <input type="text" [(ngModel)]="task.title" class="form-control form-control-sm" id="title"
-      aria-describedby="title-help">
+      aria-describedby="title-help" [disabled]="loading">
     <div id="title-help" class="form-text">The title of the task</div>
   </div>
   <div class="mb-3">
     <label for="description" class="form-label">Description</label>
     <input type="text" [(ngModel)]="task.description" class="form-control form-control-sm" id="description"
-      aria-describedby="description-help">
+      aria-describedby="description-help" [disabled]="loading">
     <div id="description-help" class="form-text">A short description of the task</div>
   </div>
   <div class="mb-3">
-    <select class="form-select form-select-sm" aria-label="category" [(ngModel)]="task.categoryId">
+    <select class="form-select form-select-sm" aria-label="category" [(ngModel)]="task.categoryId" [disabled]="loading">
       <option [ngValue]="category.id" *ngFor="let category of categories">{{category.title}}
       </option>
     </select>
   </div>
-  <button type="button" (click)="fireUpdate(task)" class="btn btn-primary btn-sm">Save</button>
-  <button type="button" (click)="editing = !editing" class="btn btn-outline-secondary mx-2 btn-sm">Cancel</button>
+  <button type="button" (click)="fireUpdate(task)" [disabled]="loading" class="btn btn-primary btn-sm">Save</button>
+  <button type="button" (click)="editing = !editing" [disabled]="loading" class="btn btn-outline-secondary mx-2 btn-sm">Cancel</button>
 </div>

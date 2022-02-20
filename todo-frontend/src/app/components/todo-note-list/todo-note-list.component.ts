@@ -14,6 +14,7 @@ export class TodoNoteListComponent implements OnInit {
   categories: Category[] = [];
   loading = false;
   isAdding = false;
+  firstLoading = true;
   showDone = true;
   newTask: TodoTask = {} as TodoTask;
   isEditing: Record<number, boolean> = {};
@@ -41,12 +42,13 @@ export class TodoNoteListComponent implements OnInit {
             this.isEditing[t.id] = false;
             this.isEditing = { ...this.isEditing };
           });
-
           this.loading = false;
+          this.firstLoading = false;
         });
       },
       error: (e: Error) => {
         this.errorDescription = e.message;
+        this.firstLoading = false;
       },
     });
   }
@@ -60,9 +62,13 @@ export class TodoNoteListComponent implements OnInit {
   }
 
   get isNewOrEditMode() {
-    return (
-      this.isAdding || Object.values(this.isEditing).reduce((p, c) => p || c)
-    );
+    if (Object.values(this.isEditing).length > 0) {
+      return (
+        this.isAdding || Object.values(this.isEditing).reduce((p, c) => p || c)
+      );
+    } else {
+      return this.isAdding;
+    }
   }
 
   getCategoryTitle(id: number) {
@@ -89,7 +95,6 @@ export class TodoNoteListComponent implements OnInit {
     this.loading = true;
     this.todosStore.update(todoTask).subscribe({
       next: () => {
-        console.log('Task updated');
         this.toggleEditMode(todoTask.id, false);
         this.loadData();
       },
@@ -100,6 +105,7 @@ export class TodoNoteListComponent implements OnInit {
   }
 
   deleteTask(todoTask: TodoTask) {
+    this.tasks = this.tasks.filter((t) => t.id !== todoTask.id);
     this.loading = true;
     this.todosStore.remove(todoTask.id).subscribe({
       next: () => {
@@ -116,9 +122,10 @@ export class TodoNoteListComponent implements OnInit {
   }
 
   saveNew() {
+    this.isAdding = false;
+    this.tasks.push(this.newTask);
     this.todosStore.add(this.newTask).subscribe({
       next: () => {
-        this.cancelNew();
         this.loadData();
       },
       error: (e: Error) => {

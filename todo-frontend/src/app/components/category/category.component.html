@@ -5,7 +5,7 @@
     </div>
     <div class="col text-end">
       <i class="bi bi-pencil-square clickable mx-1" (click)="editing = !editing"></i>
-      <i class="bi bi-trash clickable mx-1" (click)="fireDelete(category)"></i>
+      <i *ngIf="category.id!==1" class="bi bi-trash clickable mx-1" (click)="fireDelete(category)"></i>
     </div>
   </div>
   <p class="card-text">{{category.description}}</p>

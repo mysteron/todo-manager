@@ -1,39 +1,46 @@
-<div *ngIf="errorDescription">
-  <div class="alert alert-danger" role="alert">
-    <strong>An error occured:</strong>{{errorDescription}}
-    <div class="mt-3">
-      <button (click)="loadData()" class="btn btn-primary btn-sm">Try again</button>
-    </div>
+<div *ngIf="firstLoading">
+  <div class="spinner-border" role="status">
+    <!-- <span class="sr-only">Loading...</span> -->
   </div>
 </div>
-<div *ngIf="!errorDescription">
-  <div class="row">
-    <div class="card mb-3" *ngFor="let cat of categories">
-      <app-category [category]="cat" [(editing)]="isEditing[cat.id]" (update)="updateCategory(cat)"
-        (delete)="deleteCategory(cat)" (update)="updateCategory(cat)"></app-category>
-    </div>
-    <div class="card mb-3" *ngIf="!isAdding">
-      <div class="card-body">
-        <button type="button" (click)="toggleAddingMode(true)" class="btn btn-primary btn-sm">Add...</button>
+<div *ngIf="!firstLoading">
+  <div *ngIf="errorDescription">
+    <div class="alert alert-danger" role="alert">
+      <strong>An error occured:</strong>{{errorDescription}}
+      <div class="mt-3">
+        <button (click)="loadData()" class="btn btn-primary btn-sm">Try again</button>
       </div>
     </div>
-    <div class="card mb-3" *ngIf="isAdding">
-      <div class="card-body">
+  </div>
+  <div *ngIf="!errorDescription">
+    <div class="row">
+      <div class="card mb-3" *ngFor="let cat of categories">
+        <app-category [category]="cat" [(editing)]="isEditing[cat.id]" (update)="updateCategory(cat)"
+          (delete)="deleteCategory(cat)" (update)="updateCategory(cat)"></app-category>
+      </div>
+      <div class="card mb-3" *ngIf="!isAdding">
+        <div class="card-body">
+          <button type="button" (click)="toggleAddingMode(true)" class="btn btn-primary btn-sm">Add...</button>
+        </div>
+      </div>
+      <div class="card mb-3" *ngIf="isAdding">
+        <div class="card-body">
 
-        <div class="mb-3">
-          <label for="title" class="form-label ">Title</label>
-          <input type="text" [(ngModel)]="newCategory.title" class="form-control form-control-sm" id="title"
-            aria-describedby="title-help">
-          <div id="title-help" class="form-text">The title of the category</div>
+          <div class="mb-3">
+            <label for="title" class="form-label ">Title</label>
+            <input type="text" [(ngModel)]="newCategory.title" class="form-control form-control-sm" id="title"
+              aria-describedby="title-help">
+            <div id="title-help" class="form-text">The title of the category</div>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" [(ngModel)]="newCategory.description" class="form-control form-control-sm"
+              id="description" aria-describedby="description-help">
+            <div id="description-help" class="form-text">A short description of the category</div>
+          </div>
+          <button type="button" (click)="saveNew()" class="btn btn-primary btn-sm">Save</button>
+          <button type="button" (click)="cancelNew()" class="btn btn-outline-secondary mx-2 btn-sm">Cancel</button>
         </div>
-        <div class="mb-3">
-          <label for="description" class="form-label">Description</label>
-          <input type="text" [(ngModel)]="newCategory.description" class="form-control form-control-sm" id="description"
-            aria-describedby="description-help">
-          <div id="description-help" class="form-text">A short description of the category</div>
-        </div>
-        <button type="button" (click)="saveNew()" class="btn btn-primary btn-sm">Save</button>
-        <button type="button" (click)="cancelNew()" class="btn btn-outline-secondary mx-2 btn-sm">Cancel</button>
       </div>
     </div>
   </div>

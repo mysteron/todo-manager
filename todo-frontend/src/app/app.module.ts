@@ -15,9 +15,17 @@ import { AbstractTaskStore } from './services/AbstractTaskStore.service';
 import { MockTaskStoreService } from './services/MockTaskStore.service';
 import { TodoNoteComponent } from './components/todo-note/todo-note.component';
 import { CategoryComponent } from './components/category/category.component';
+import { HttpCategoryService } from './services/HttpCategoryStore.service';
+import { HttpTaskStoreService } from './services/HttpTaskStore.service';
 
 @NgModule({
-  declarations: [AppComponent, TodoNoteListComponent, CategoryListComponent, TodoNoteComponent, CategoryComponent],
+  declarations: [
+    AppComponent,
+    TodoNoteListComponent,
+    CategoryListComponent,
+    TodoNoteComponent,
+    CategoryComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [
     {
@@ -27,11 +35,11 @@ import { CategoryComponent } from './components/category/category.component';
     },
     {
       provide: AbstractCategoryStore,
-      useClass: MockCategoryService,
+      useClass: HttpCategoryService,
     },
     {
       provide: AbstractTaskStore,
-      useClass: MockTaskStoreService,
+      useClass: HttpTaskStoreService,
     },
   ],
   bootstrap: [AppComponent],

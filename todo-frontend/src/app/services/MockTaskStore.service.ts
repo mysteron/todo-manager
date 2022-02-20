@@ -21,10 +21,10 @@ export class MockTaskStoreService implements AbstractTaskStore {
     }
     return of(found);
   }
-  add(task: TodoTask): Observable<void> {
+  add(task: TodoTask): Observable<TodoTask> {
     task.id = Math.max(...this.tasks.map((t) => t.id)) + 1;
     this.tasks.push(task);
-    return of(void 0);
+    return of(task);
   }
   remove(id: number): Observable<void> {
     this.tasks = this.tasks.filter((t) => t.id !== id);

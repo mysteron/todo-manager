@@ -10,6 +10,7 @@ import { AbstractCategoryStore } from 'src/app/services/AbstractCategoryStore.se
 export class CategoryListComponent implements OnInit {
   categories: Category[] = [];
   loading = false;
+  firstLoading = true;
   isAdding = false;
   showDone = true;
   newCategory: Category = {} as Category;
@@ -26,10 +27,11 @@ export class CategoryListComponent implements OnInit {
     this.errorDescription = undefined;
     this.categoryStore.getAll().subscribe({
       next: (cats) => {
+        this.firstLoading = false;
         this.categories = cats;
-        this.loading = false;
       },
       error: (e: Error) => {
+        this.firstLoading = false;
         this.errorDescription = e.message;
       },
     });
@@ -53,13 +55,16 @@ export class CategoryListComponent implements OnInit {
   }
 
   deleteCategory(category: Category) {
+    this.categories = this.categories.filter((c) => c.id !== category.id);
     this.loading = true;
     this.categoryStore.remove(category.id).subscribe({
       next: () => {
         this.loadData();
+        this.loading = false;
       },
       error: (e: Error) => {
         this.errorDescription = e.message;
+        this.loading = false;
       },
     });
   }
@@ -69,6 +74,8 @@ export class CategoryListComponent implements OnInit {
   }
 
   saveNew() {
+    this.isAdding = false;
+    this.categories.push(this.newCategory);
     this.categoryStore.add(this.newCategory).subscribe({
       next: () => {
         this.cancelNew();

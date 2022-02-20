@@ -14,7 +14,9 @@ export class HttpAuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const reqCopy = req.clone({
-      headers: req.headers.set('Content-Type', 'application/json'),
+      headers: req.headers
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json'),
     });
     return next.handle(reqCopy);
   }

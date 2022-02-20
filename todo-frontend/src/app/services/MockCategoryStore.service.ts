@@ -28,10 +28,10 @@ export class MockCategoryService implements AbstractCategoryStore {
     }
     return of(found);
   }
-  add(category: Category): Observable<void> {
+  add(category: Category): Observable<Category> {
     category.id = Math.max(...this.categories.map((t) => t.id)) + 1;
     this.categories.push(category);
-    return of(void 0);
+    return of(category);
   }
   remove(id: number): Observable<void> {
     this.categories = this.categories.filter((t) => t.id !== id);

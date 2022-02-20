@@ -20,6 +20,9 @@ export class TodoNoteComponent implements OnInit {
   private _editing = false;
 
   @Input()
+  loading = false;
+
+  @Input()
   task: TodoTask = {} as TodoTask;
 
   @Input()
