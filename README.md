@@ -23,6 +23,15 @@ symfony server:start
 
 Navigate to http://localhost:8000/api to see the Swagger documentation of the API.
 
+
+## Running the Vue frontend
+
+To run the Symfony VUE Frontend run the following commands in the `todo-api` directory:
+```
+npm install
+npm run dev
+```
+
 ## Running the Angular frontend app
 
 In the directory `todo-frontend` run the following commands:
