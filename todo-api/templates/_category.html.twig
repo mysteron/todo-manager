@@ -1,0 +1,18 @@
+{# templates/_category.html.twig #}
+
+<div class="card mb-3">
+	<div class="card-body">
+		<div class="row">
+			<div class="col">
+				<h5 class="card-title">{{category.name}}</h5>
+			</div>
+			<div class="col text-end">
+				<i class="bi bi-pencil-square clickable mx-1"></i>
+				{% if category.id !=1 %}
+					<i class="bi bi-trash clickable mx-1"></i>
+				{% endif %}
+			</div>
+		</div>
+		<p class="card-text">{{category.description}}</p>
+	</div>
+</div>

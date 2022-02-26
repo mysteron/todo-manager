@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+	{% if errorDescription|default %}
+		<div class="alert alert-danger" role="alert">
+			<strong>An error occured:</strong>
+			{{errorDescription}}
+			<div class="mt-3">
+				<button class="btn btn-primary btn-sm">Try again</button>
+			</div>
+		</div>
+	{% else %}
+
+		<div class="row">
+
+			{% for todo in todos %}
+				{{ include('_todo.html.twig', { task: todo, isEditing: todo.id == toEdit|default}) }}
+			{% endfor %}
+		</div>
+	{% endif %}
+{% endblock %}
