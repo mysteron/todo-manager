@@ -21,6 +21,8 @@ final class Version20220215214728 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE todo_note ADD completed BOOLEAN DEFAULT NULL');
+        $this->addSql('INSERT INTO public.user VALUES (1, \'user@acme.com\', \'[]\')');
+        $this->addSql('INSERT INTO public.category VALUES (1, 1, \'General\', \'General tasks\')');
     }
 
     public function down(Schema $schema): void

@@ -20,7 +20,7 @@ services:
       - "8080:8080"
 ###< doctrine/doctrine-bundle ###
 
-volumes:
+#volumes:
   ###> doctrine/doctrine-bundle ###
-  db-data:
+ #  db-data:
 ###< doctrine/doctrine-bundle ###

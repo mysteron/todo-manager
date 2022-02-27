@@ -14,14 +14,14 @@
 		<div class="row todo-notes">
 
 			{% for todo in todos %}
-				{{ include('_todo.html.twig', { task: todo, isEditing: todo.id == toEdit|default}) }}
+				{{ include('_todo.html.twig', { task: todo }) }}
 			{% endfor %}
-
+			{{ include('_todo.html.twig', { task: null }) }}
 		</div>
 		<div class="card mb-3 todo-add-button">
 			<div class="card-body">
 				<button type="button" class="btn btn-primary btn-sm add-new-task">Add new
-																									            task...</button>
+																														            task...</button>
 			</div>
 		</div>
 		<div class="card mb-3 todo-adding" style="display:none;">

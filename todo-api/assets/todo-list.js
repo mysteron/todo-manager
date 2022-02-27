@@ -74,12 +74,14 @@ let categories = [];
       $(todoNoteCopy).find('#title').text(taskName);
       $(todoNoteCopy).find('#description').text(taskDesc);
       $(todoNoteCopy).find('#categoryName').text(categoryName);
+      $(todoNoteCopy).show();
 
       const todoEditCopy = $('.todo_note_edit').last().clone(true).appendTo('.todo-notes');
       $(todoEditCopy).find('.todo-card').attr('data-taskid', t.id);
       $(todoEditCopy).find('#title').val(taskName);
       $(todoEditCopy).find('#description').val(taskDesc);
       $(todoEditCopy).find('#categoryName').val(categoryName);
+      $(todoEditCopy).show();
 
       $('.todo-adding').find('input#title').val('');
       $('.todo-adding').find('input#description').val('');
