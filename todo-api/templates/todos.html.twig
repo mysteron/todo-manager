@@ -11,12 +11,44 @@
 		</div>
 	{% else %}
 
-		<div class="row">
+		<div class="row todo-notes">
 
 			{% for todo in todos %}
 				{{ include('_todo.html.twig', { task: todo, isEditing: todo.id == toEdit|default}) }}
 			{% endfor %}
 
+		</div>
+		<div class="card mb-3 todo-add-button">
+			<div class="card-body">
+				<button type="button" class="btn btn-primary btn-sm add-new-task">Add new
+																									            task...</button>
+			</div>
+		</div>
+		<div class="card mb-3 todo-adding" style="display:none;">
+			<div class="card-body">
+
+				<div class="mb-3">
+					<label for="title" class="form-label ">Title</label>
+					<input type="text" class="form-control form-control-sm" id="title" aria-describedby="title-help">
+					<div id="title-help" class="form-text">The title of the task</div>
+				</div>
+				<div class="mb-3">
+					<label for="description" class="form-label">Description</label>
+					<input type="text" class="form-control form-control-sm" id="description" aria-describedby="description-help">
+					<div id="description-help" class="form-text">A short description of the task</div>
+				</div>
+				<div class="mb-3">
+					<select id="categoryId" class="form-select form-select-sm" aria-label="category">
+						{% for category in categories %}
+							<option value={{category.id}}>
+								{{category.name}}
+							</option>
+						{% endfor %}
+					</select>
+				</div>
+				<button type="button" class="btn btn-primary btn-sm save-new">Save</button>
+				<button type="button" class="btn btn-outline-secondary mx-2 btn-sm cancel-new">Cancel</button>
+			</div>
 		</div>
 	{% endif %}
 {% endblock %}

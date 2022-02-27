@@ -21,3 +21,4 @@ require('bootstrap');
 // require('bootstrap/js/dist/popover');
 
 require('./todo-list');
+require('./categories');

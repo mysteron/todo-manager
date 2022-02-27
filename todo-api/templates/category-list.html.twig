@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
 {% block content %}
-	{{ editing }}
 	{% if errorDescription|default %}
 		<div class="alert alert-danger" role="alert">
 			<strong>An error occured:</strong>
@@ -10,10 +9,32 @@
 			</div>
 		</div>
 	{% else %}
-		<div class="row">
+		<div class="row categories">
 			{% for cat in categories %}
 				{{ include('_category.html.twig', { category: cat}) }}
 			{% endfor %}
+		</div>
+		<div class="card mb-3 category-add-button">
+			<div class="card-body">
+				<button type="button" class="btn btn-primary btn-sm">Add...</button>
+			</div>
+		</div>
+		<div class="card mb-3 category-adding" style="display:none;">
+			<div class="card-body">
+
+				<div class="mb-3">
+					<label for="title" class="form-label">Title</label>
+					<input type="text" class="form-control form-control-sm" id="title" aria-describedby="title-help">
+					<div id="title-help" class="form-text">The title of the category</div>
+				</div>
+				<div class="mb-3">
+					<label for="description" class="form-label">Description</label>
+					<input type="text" class="form-control form-control-sm" id="description" aria-describedby="description-help">
+					<div id="description-help" class="form-text">A short description of the category</div>
+				</div>
+				<button type="button" class="btn btn-primary btn-sm cat-save-new">Save</button>
+				<button type="button" class="btn btn-outline-secondary mx-2 btn-sm cat-cancel-new">Cancel</button>
+			</div>
 		</div>
 	{% endif %}
 {% endblock %}
