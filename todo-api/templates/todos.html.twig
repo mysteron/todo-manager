@@ -14,8 +14,9 @@
 		<div class="row">
 
 			{% for todo in todos %}
-				{{ include('_todo.html.twig', { categories: categories, task: todo, isEditing: todo.id == toEdit|default}) }}
+				{{ include('_todo.html.twig', { task: todo, isEditing: todo.id == toEdit|default}) }}
 			{% endfor %}
+
 		</div>
 	{% endif %}
 {% endblock %}
